@@ -111,6 +111,36 @@ Now that your repository is set up, open up VS Code and open the folder containi
 
 At this point you should be able to open your project repository in the container. To do so, open up Docker Desktop and then go back into VS Code, press `Ctrl + Shift + P` which opens up the command palette for VS Code and then search and click on `Dev Containers: Reopen in Container`. 
 
+## Part 3. Creating a Basic Rust Program
+
+Now that your project is running in the dev container, let's create a simply hello program in Rust.
+
+### What is Rust?
+
+Rust is a systems programming language that runs swiftly, prevents segfaults, and guarantees thread safety. It is dessigned to be a safem concurrent, and practical language. Rust has a rich type system and ownership model guranteeing memory safety, enabling you to eliminate a variety of bugs at complie-time. For more information, visit the [official Rust documentation](https://www.rust-lang.org/learn).
+
+
+### Step 1. Create a new Rust project:
+
+Using the terminal in VS Code, type the following to create a new Rust project:
+
+    ```bash
+    cargo new hello_comp423 --vcs none
+    ```
+
+#### What is Cargo?
+
+Cargo is the Rust package manager and build system. Cargo handles tasks such as building your code, downloading the libraries your code depends on, and building those libraries. When you create a new Rust project using `cargo new`, Cargo will generate a project structure with a `Cargo.toml` file, which is used to specify the project's dependencies and metadata. For more infomation, visit the [official Cargo documentation](https://doc.rust-lang.org/cargo/index.html). In our project it will look like:
+
+    ```
+    hello_comp423
+    |--- Cargo.toml
+    |___ src
+            |__ main.rs
+    ```
+
+!!! note "--vcs none"
+    When using `cargo new` it will try to create a new Git repository for your project so we add `--vcs none` to the end of the command to tell the Version Control to not create one since we already have.
 
 
 
