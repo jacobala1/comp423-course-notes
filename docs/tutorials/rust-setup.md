@@ -123,21 +123,16 @@ Rust is a systems programming language that runs swiftly, prevents segfaults, an
 ### Step 1. Create a new Rust project:
 
 Using the terminal in VS Code, type the following to create a new Rust project:
-
-    ```bash
-    cargo new hello_comp423 --vcs none
-    ```
+```bash
+cargo new hello_comp423 --vcs none
+```
 
 #### What is Cargo?
 
-Cargo is the Rust package manager and build system. Cargo handles tasks such as building your code, downloading the libraries your code depends on, and building those libraries. When you create a new Rust project using `cargo new`, Cargo will generate a project structure with a `Cargo.toml` file, which is used to specify the project's dependencies and metadata. For more infomation, visit the [official Cargo documentation](https://doc.rust-lang.org/cargo/index.html). In our project it will look like:
+Cargo is the Rust package manager and build system. Cargo handles tasks such as building your code, downloading the libraries your code depends on, and building those libraries. When you create a new Rust project using `cargo new`, Cargo will generate a project structure with a `Cargo.toml` file, which is used to specify the project's dependencies and metadata. For more infomation, visit the [official Cargo documentation](https://doc.rust-lang.org/cargo/index.html). 
 
-    ```
-    hello_comp423
-    |--- Cargo.toml
-    |___ src
-            |__ main.rs
-    ```
+With the command we just ran, you will see a directory with the name `hello_comp423` and within it the `Cargo.toml` file and a subdirectory `src` which contains `main.rs` which is where the main functionalty of a Rust program is written.
+
 
 !!! note "--vcs none"
     When using `cargo new` it will try to create a new Git repository for your project so we add `--vcs none` to the end of the command to tell the Version Control to not create one since we already have.
@@ -154,29 +149,25 @@ Cargo is the Rust package manager and build system. Cargo handles tasks such as 
 
 2. Complie and run the program:
 
-    To compile, run:
+To compile, type `cargo build` in the terminal.
 
-    ```bash
-    cargo build
-    ```
-    This command is similar to the `gcc` command you may be familiar with, in that, it complies your code. The compiled binary will be located in a directory labeled `target/debug`.
+This command is similar to the `gcc` command you may be familiar with, in that, it complies your code. The compiled binary will be located in a directory labeled `target/debug`.
 
-    Then, to run the compiled binary, type this on the command line:
+Then, to run the compiled binary, type this on the command line:
 
-    ```bash
-    ./target/debug/hello_comp423
-    ```
+```bash
+./target/debug/hello_comp423
+```
 
-    Alternatively, you can just use the command `cargo run`, complies and runs the program in one go.
+Alternatively, you can just use the command `cargo run`, complies and runs the program in one go. 
 
-
-
-You've now successfully created a Rust dev container and run a program on it. Congradulations!!!
+You've now successfully created a Rust dev container and run a program on it. Congratulations!!!
 
 
 ## Sources
 
 [^1]: [Starting a Static Website Project with MkDocs by Kris Jordan](https://comp423-25s.github.io/resources/MkDocs/tutorial/#step-2-create-a-remote-repository-on-github)
+
 [^2]: [Rust Development Container Images](https://hub.docker.com/r/microsoft/devcontainers-rust)
 
 
