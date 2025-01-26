@@ -142,6 +142,36 @@ Cargo is the Rust package manager and build system. Cargo handles tasks such as 
 !!! note "--vcs none"
     When using `cargo new` it will try to create a new Git repository for your project so we add `--vcs none` to the end of the command to tell the Version Control to not create one since we already have.
 
+### Write the program
+
+1. Open up the `main.rs` and replace its contents with:
+
+    ```rust
+    fn main() {
+        println!("Hello COMP423");
+    }
+    ```
+
+2. Complie and run the program:
+
+    To compile, run:
+
+    ```bash
+    cargo build
+    ```
+    This command is similar to the `gcc` command you may be familiar with, in that, it complies your code. The compiled binary will be located in a directory labeled `target/debug`.
+
+    Then, to run the compiled binary, type this on the command line:
+
+    ```bash
+    ./target/debug/hello_comp423
+    ```
+
+    Alternatively, you can just use the command `cargo run`, complies and runs the program in one go.
+
+
+
+You've now successfully created a Rust dev container and run a program on it. Congradulations!!!
 
 
 ## Sources
