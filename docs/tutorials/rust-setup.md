@@ -66,3 +66,11 @@ If you would like to share your dev container with others, set up a remote repos
 
 (4) Click **Create Repository** 
 
+(5) Link your local repo with the remote one. In your terminal do the following:
+```bash
+git remote add origin https://github.com/<your-username>/<remote-repo-name>.git
+```
+
+!!! note "Pushing to remote repo"
+    Once your ready to make your changes present on the remote repo you'll need to push your commits to the remote repository. If you are on a branch that is not currently represented in the remote repo, when you push for the first time you'll type `git push --set-upstream origin <branch-name>`, allowing the repo to track it. After that pushes with the same branch don't require the `--set-upstream` flag.
+
