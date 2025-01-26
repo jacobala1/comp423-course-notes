@@ -149,7 +149,7 @@ With the command we just ran, you will see a directory with the name `hello_comp
 
 2. Complie and run the program:
 
-To compile, type `cargo build` in the terminal.
+To compile, go into the `hello_comp423` directory in the terminal and type `cargo build` in the terminal.
 
 This command is similar to the `gcc` command you may be familiar with, in that, it complies your code. The compiled binary will be located in a directory labeled `target/debug`.
 
