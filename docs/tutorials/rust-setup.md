@@ -14,9 +14,9 @@ Setting up a developement container for specific coding languages allows for eff
 
 Before beginning this tutorial, please ensure you have:
 
-    1. **A GitHub account**: If you don't have one, sign up at [GitHub](https://github.com).
-    2. **Git installed**: [Install Git](https://git-scm.com) if you don't already have it.
-    3. **Visual Studio Code (VS Code): Download and install it [here](https://code.visualstudio.com)
-    4 **Docker installed**: Needed to run the dev container. [Get Docker here](https://docker.com/products/docker-desktop/).
-    5 **Command Line Basics**: Familiarity with the command line will be beneficial in understanding how to set-up the environment.
+ 1. **A GitHub account**: If you don't have one, sign up at [GitHub](https://github.com).
+ 2. **Git installed**: [Install Git](https://git-scm.com) if you don't already have it.
+ 3. **Visual Studio Code (VS Code): Download and install it [here](https://code.visualstudio.com)
+ 4 **Docker installed**: Needed to run the dev container. [Get Docker here](https://docker.com/products/docker-desktop/).
+ 5 **Command Line Basics**: Familiarity with the command line will be beneficial in understanding how to set-up the environment.
 
