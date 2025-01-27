@@ -180,5 +180,3 @@ You've now successfully created a Rust dev container and run a program on it. Co
 [^1]: [Starting a Static Website Project with MkDocs by Kris Jordan](https://comp423-25s.github.io/resources/MkDocs/tutorial/#step-2-create-a-remote-repository-on-github)
 
 [^2]: [Rust Development Container Images](https://hub.docker.com/r/microsoft/devcontainers-rust)
-
-
