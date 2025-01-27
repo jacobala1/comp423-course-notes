@@ -5,11 +5,11 @@
 
 
 
-Welcome! In this tutorial you will learn how to create a basic development container for the Rust programming language. Along the way you will gain familiarity with setting up container through VS Code and even be able to wrtie and run a basic Rust program. 
+Welcome! In this tutorial you will learn how to create a basic development container for the Rust programming language. Along the way you will gain familiarity with setting up container through VS Code and even be able to write and run a basic Rust program. 
 
 ## Why is This Important? 
 
-Setting up a developement container for specific coding languages allows for efficient collaboration by enabling all users to work in the same environment (language version, specific extensions needed, etc...) regardless of their machine and without the need of manually installing them on your machine. Being able to build, understand, and utilize containers is an important aspect for software developers and further broadens your technical skillset.
+Setting up a development container for specific coding languages allows for efficient collaboration by enabling all users to work in the same environment (language version, specific extensions needed, etc...) regardless of their machine and without the need of manually installing them on your machine. Being able to build, understand, and utilize containers is an important aspect for software developers and further broadens your technical skillset.
 
 ## Prerequisites
 
@@ -88,11 +88,6 @@ Now that your repository is set up, open up VS Code and open the folder containi
 
 4. Fill the contents of the `.json` file with the following:
 
-    * `name`: Name of the dev container
-    * `image`: The base image for the container. Specifies what language the environment will run for all users. In this case we are using a basic image provided by Microsoft to run the latest version of Rust.
-    * `customizations`: In this part of the file you specify useful extensions in VS Code for the container to configure. In this case we are added the Rust Analyzer extension which adds additional features for developers to edit, format, and error check Rust programs. 
-    * `postCreateCommand`: This runs commands post the creation of the dev container. In our case we run will run a commnad that shows us the version of Rust being used to confirm the container is working correctly.    
-
     ```json
     {
         "name": "Rust Dev Container",
@@ -106,6 +101,22 @@ Now that your repository is set up, open up VS Code and open the folder containi
         "postCreateCommand": "rustc --version"
     }
     ```
+    `name`
+
+    :   Name of the dev container
+
+    `image`
+
+    :   The base image for the container. Specifies what language the environment will run for all users. In this case we are using a basic image provided by Microsoft to run the latest version of Rust.
+
+    `customizations`
+
+    :   In this part of the file you specify useful extensions in VS Code for the container to configure. In this case we are added the Rust Analyzer extension which adds additional features for developers to edit, format, and error check Rust programs. 
+
+    `postCreateCommand`
+
+    :   This runs commands post the creation of the dev container. In our case we run will run a command that shows us the version of Rust being used to confirm the container is working correctly.    
+
 !!! note "Image vs Container"
     As mentioned above the image provides the details on the programming language the container will configure and install in the environment. The container is simply the running environment after everything in the `.json` file has been configured. 
 
@@ -113,11 +124,11 @@ At this point you should be able to open your project repository in the containe
 
 ## Part 3. Creating a Basic Rust Program
 
-Now that your project is running in the dev container, let's create a simply hello program in Rust.
+Now that your project is running in the dev container, let's create a simple hello program in Rust.
 
 ### What is Rust?
 
-Rust is a systems programming language that runs swiftly, prevents segfaults, and guarantees thread safety. It is dessigned to be a safem concurrent, and practical language. Rust has a rich type system and ownership model guranteeing memory safety, enabling you to eliminate a variety of bugs at complie-time. For more information, visit the [official Rust documentation](https://www.rust-lang.org/learn).
+Rust is a systems programming language that runs swiftly, prevents segfaults, and guarantees thread safety. It is dessigned to be a safe, concurrent, and practical language. Rust has a rich type system and ownership model guranteeing memory safety, enabling you to eliminate a variety of bugs at compile-time. For more information, visit the [official Rust documentation](https://www.rust-lang.org/learn).
 
 
 ### Step 1. Create a new Rust project:
@@ -159,7 +170,7 @@ Then, to run the compiled binary, type this on the command line:
 ./target/debug/hello_comp423
 ```
 
-Alternatively, you can just use the command `cargo run`, complies and runs the program in one go. 
+Alternatively, you can just use the command `cargo run`, compiles and runs the program in one go. 
 
 You've now successfully created a Rust dev container and run a program on it. Congratulations!!!
 
