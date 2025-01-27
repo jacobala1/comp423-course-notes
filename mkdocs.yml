@@ -12,3 +12,5 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  # adding definition lists
+  - def_list
