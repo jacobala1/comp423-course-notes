@@ -1,0 +1,811 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.50">
+    
+    
+      
+        <title>Setting up a Dev Container for Rust - COMP423 Course Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.a40c8224.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#setting-up-a-dev-container-for-rust" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="COMP423 Course Notes" class="md-header__button md-logo" aria-label="COMP423 Course Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            COMP423 Course Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Setting up a Dev Container for Rust
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="COMP423 Course Notes" class="md-nav__button md-logo" aria-label="COMP423 Course Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    COMP423 Course Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to Jacob Gogel's Course Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Setting up a Dev Container for Rust
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Setting up a Dev Container for Rust
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-is-this-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why is This Important?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-project-setup-creating-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 1. Project Setup: Creating the Repository
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1. Project Setup: Creating the Repository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-setting-up-a-local-git-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1. Setting Up a Local Git Repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-creating-a-remote-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2. Creating a Remote Repository
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-creating-the-dev-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2. Creating the Dev Container
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-creating-a-basic-rust-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 3. Creating a Basic Rust Program
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3. Creating a Basic Rust Program">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-rust" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Rust?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-a-new-rust-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1. Create a new Rust project:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1. Create a new Rust project:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-cargo" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Cargo?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-the-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write the program
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-is-this-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why is This Important?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-1-project-setup-creating-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 1. Project Setup: Creating the Repository
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 1. Project Setup: Creating the Repository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-setting-up-a-local-git-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1. Setting Up a Local Git Repository
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-creating-a-remote-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2. Creating a Remote Repository
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-2-creating-the-dev-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 2. Creating the Dev Container
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-3-creating-a-basic-rust-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      Part 3. Creating a Basic Rust Program
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Part 3. Creating a Basic Rust Program">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-rust" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Rust?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-create-a-new-rust-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1. Create a new Rust project:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1. Create a new Rust project:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-cargo" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Cargo?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-the-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write the program
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="setting-up-a-dev-container-for-rust">Setting up a Dev Container for Rust</h1>
+<ul>
+<li>Primary author: <a href="https://github.com/jacobala1">Jacob Gogel</a></li>
+<li>Reviewer: <a href="https://github.com/hashunc">Jonathan Jacob</a></li>
+</ul>
+<p>Welcome! In this tutorial you will learn how to create a basic development container for the Rust programming language. Along the way you will gain familiarity with setting up container through VS Code and even be able to write and run a basic Rust program. </p>
+<h2 id="why-is-this-important">Why is This Important?</h2>
+<p>Setting up a development container for specific coding languages allows for efficient collaboration by enabling all users to work in the same environment (language version, specific extensions needed, etc...) regardless of their machine and without the need of manually installing them on your machine. Being able to build, understand, and utilize containers is an important aspect for software developers and further broadens your technical skillset.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before beginning this tutorial, please ensure you have [^1]:</p>
+<ol>
+<li><strong>A GitHub account</strong>: If you don't have one, sign up at <a href="https://github.com">GitHub</a>.</li>
+<li><strong>Git installed</strong>: <a href="https://git-scm.com">Install Git</a> if you don't already have it.</li>
+<li><strong>Visual Studio Code (VS Code)</strong>: Download and install it <a href="https://code.visualstudio.com">here</a></li>
+<li><strong>Docker installed</strong>: Needed to run the dev container. <a href="https://docker.com/products/docker-desktop/">Get Docker here</a>.</li>
+<li><strong>Command Line Basics</strong>: Familiarity with the command line will be beneficial in understanding how to set-up the environment.</li>
+</ol>
+<h2 id="part-1-project-setup-creating-the-repository">Part 1. Project Setup: Creating the Repository</h2>
+<h3 id="step-1-setting-up-a-local-git-repository">Step 1. Setting Up a Local Git Repository</h3>
+<ol>
+<li>
+<p>Open your terminal/command prompt.</p>
+</li>
+<li>
+<p>Create a new directory or change into a parent diretory for where you'd like the direcotry to be stored on your machine.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdir<span class="w"> </span>rust-dev-container
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>rust-dev-container
+</span></code></pre></div>
+</li>
+<li>
+<p>Initialize a new Git repository:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>init
+</span></code></pre></div></p>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">What is init?</p>
+<p>'init' is a subcommand for Git that makes your directory function as a local Git repository for you to use other subcommands to make commits and save and push work to a remote repository on GitHub to share your work with others if you desire</p>
+</div>
+<ol>
+<li>
+<p>Create a README file where you can explain what your project is about [^1]. </p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# Creating a Rust Dev Container&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>README.md
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>git<span class="w"> </span>add<span class="w"> </span>README.md
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>git<span class="w"> </span>commmit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initial commit with README&quot;</span>
+</span></code></pre></div>
+</li>
+</ol>
+<h3 id="step-2-creating-a-remote-repository">Step 2. Creating a Remote Repository</h3>
+<p>If you would like to share your dev container with others, set up a remote repository on GitHub and link it with your local repository allowing other users to se changes/updates you make.</p>
+<p>(1) Log in to GitHub and go to <a href="https://github.com/new">Create a New Repository</a></p>
+<p>(2) Fill out the details for your repository:</p>
+<ul>
+<li><strong>Name</strong>: Make it the same or something similar to the local repo name</li>
+<li><strong>Description</strong>: Provide a description like "Basic dev container for Rust"</li>
+<li><strong>Visibility</strong>: Make it public</li>
+</ul>
+<p>(3) Do not initialize the repository with a README.md, .gitignore, or license</p>
+<p>(4) Click <strong>Create Repository</strong> </p>
+<p>(5) Link your local repo with the remote one. In your terminal do the following:
+    <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/&lt;your-username&gt;/&lt;remote-repo-name&gt;.git
+</span></code></pre></div></p>
+<div class="admonition note">
+<p class="admonition-title">Pushing to remote repo</p>
+<p>Once your ready to make your changes present on the remote repo you'll need to push your commits to the remote repository. If you are on a branch that is not currently represented in the remote repo, when you push for the first time you'll type <code>git push --set-upstream origin &lt;branch-name&gt;</code>, allowing the repo to track it. After that, pushes with the same branch don't require the <code>--set-upstream</code> flag.</p>
+</div>
+<h2 id="part-2-creating-the-dev-container">Part 2. Creating the Dev Container</h2>
+<p>Now that your repository is set up, open up VS Code and open the folder containing your repo. Then, follow these steps to set up the dev container:</p>
+<ol>
+<li>
+<p>In the root directory of your project, create a folder named <code>.devcontainer</code>. This directory will contain the the files that VS Code will read to configure and run the dev container.</p>
+</li>
+<li>
+<p>Install the <strong>Dev Containers</strong> extension for VS Code</p>
+</li>
+<li>
+<p>Create a file within <code>.devcontainer</code> called <code>devcontainer.json</code>. This file holds the contents to be configured for the container.</p>
+</li>
+<li>
+<p>Fill the contents of the <code>.json</code> file with the following:</p>
+<dl>
+<dt><div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rust Dev Container&quot;</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mcr.microsoft.com/vscode/devcontainers/rust:latest&quot;</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">&quot;customizations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="nt">&quot;vscode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">            </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">            </span><span class="nt">&quot;extensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;rust-lang.rust-analyzer&quot;</span><span class="p">]</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="p">},</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nt">&quot;postCreateCommand&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rustc --version&quot;</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
+</span></code></pre></div></dt>
+<dt><code>name</code></dt>
+<dd>
+<p>Name of the dev container</p>
+</dd>
+<dt><code>image</code></dt>
+<dd>
+<p>The base image for the container. Specifies what language the environment will run for all users. In this case we are using a basic image provided by Microsoft to run the latest version of Rust.</p>
+</dd>
+<dt><code>customizations</code></dt>
+<dd>
+<p>In this part of the file you specify useful extensions in VS Code for the container to configure. In this case we are added the Rust Analyzer extension which adds additional features for developers to edit, format, and error check Rust programs. </p>
+</dd>
+<dt><code>postCreateCommand</code></dt>
+<dd>
+<p>This runs commands post the creation of the dev container. In our case we run will run a command that shows us the version of Rust being used to confirm the container is working correctly.    </p>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Image vs Container</p>
+<p>As mentioned above the image provides the details on the programming language the container will configure and install in the environment. The container is simply the running environment after everything in the <code>.json</code> file has been configured. </p>
+</div>
+<p>At this point you should be able to open your project repository in the container. To do so, open up Docker Desktop and then go back into VS Code, press <code>Ctrl + Shift + P</code> which opens up the command palette for VS Code and then search and click on <code>Dev Containers: Reopen in Container</code>. </p>
+<h2 id="part-3-creating-a-basic-rust-program">Part 3. Creating a Basic Rust Program</h2>
+<p>Now that your project is running in the dev container, let's create a simple hello program in Rust.</p>
+<h3 id="what-is-rust">What is Rust?</h3>
+<p>Rust is a systems programming language that runs swiftly, prevents segfaults, and guarantees thread safety. It is dessigned to be a safe, concurrent, and practical language. Rust has a rich type system and ownership model guranteeing memory safety, enabling you to eliminate a variety of bugs at compile-time. For more information, visit the <a href="https://www.rust-lang.org/learn">official Rust documentation</a>.</p>
+<h3 id="step-1-create-a-new-rust-project">Step 1. Create a new Rust project:</h3>
+<p>Using the terminal in VS Code, type the following to create a new Rust project:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cargo<span class="w"> </span>new<span class="w"> </span>hello_comp423<span class="w"> </span>--vcs<span class="w"> </span>none
+</span></code></pre></div></p>
+<h4 id="what-is-cargo">What is Cargo?</h4>
+<p>Cargo is the Rust package manager and build system. Cargo handles tasks such as building your code, downloading the libraries your code depends on, and building those libraries. When you create a new Rust project using <code>cargo new</code>, Cargo will generate a project structure with a <code>Cargo.toml</code> file, which is used to specify the project's dependencies and metadata. For more infomation, visit the <a href="https://doc.rust-lang.org/cargo/index.html">official Cargo documentation</a>. </p>
+<p>With the command we just ran, you will see a directory with the name <code>hello_comp423</code> and within it the <code>Cargo.toml</code> file and a subdirectory <code>src</code> which contains <code>main.rs</code> which is where the main functionalty of a Rust program is written.</p>
+<div class="admonition note">
+<p class="admonition-title">--vcs none</p>
+<p>When using <code>cargo new</code> it will try to create a new Git repository for your project so we add <code>--vcs none</code> to the end of the command to tell the Version Control to not create one since we already have.</p>
+</div>
+<h3 id="write-the-program">Write the program</h3>
+<ol>
+<li>
+<p>Open up the <code>main.rs</code> and replace its contents with:</p>
+<div class="language-rust highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Hello COMP423&quot;</span><span class="p">);</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">}</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>Complie and run the program:</p>
+</li>
+</ol>
+<p>To compile, go into the <code>hello_comp423</code> directory in the terminal and type <code>cargo build</code> in the terminal.</p>
+<p>This command is similar to the <code>gcc</code> command you may be familiar with, in that, it complies your code. The compiled binary will be located in a directory labeled <code>target/debug</code>.</p>
+<p>Then, to run the compiled binary, type this on the command line:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./target/debug/hello_comp423
+</span></code></pre></div>
+<p>Alternatively, you can just use the command <code>cargo run</code>, compiles and runs the program in one go. </p>
+<p>You've now successfully created a Rust dev container and run a program on it. Congratulations!!!</p>
+<h2 id="sources">Sources</h2>
+<p>[^1]: <a href="https://comp423-25s.github.io/resources/MkDocs/tutorial/#step-2-create-a-remote-repository-on-github">Starting a Static Website Project with MkDocs by Kris Jordan</a></p>
+<p>[^2]: <a href="https://hub.docker.com/r/microsoft/devcontainers-rust">Rust Development Container Images</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.60a45f97.min.js"></script>
+      
+    
+  </body>
+</html>
